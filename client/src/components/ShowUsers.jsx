@@ -8,6 +8,7 @@ const ShowUsers = props => {
     const navigate = useNavigate()
     const [messages, setMessages] = useState([])
     const [currentMessage, setCurrentMessage] = useState("")
+
     useEffect(() => {
                 if (user.id === 0) {
                     props.setAuthorized("You have to be logged in to view that page");
@@ -17,8 +18,7 @@ const ShowUsers = props => {
                     console.log("Emitting to chat")
                     setMessages((prevState) => [...prevState, data])
                 } )
-                // return () => socket.disconnect(true)
-
+                return () => socket.off("message_received")
     }, [])
 
     const sendMessage = (e) => {

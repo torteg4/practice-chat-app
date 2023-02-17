@@ -1,6 +1,7 @@
 import {useState, createContext} from 'react';
 import io from 'socket.io-client';
 
+const socket = io(":8000")
 const UserContext = createContext();
 
 const UserProvider = ({children}) => {
@@ -9,7 +10,7 @@ const UserProvider = ({children}) => {
         username: "",
         room: ""
     })
-    const [socket] = useState(() => io(":8000"))
+    // const [socket] = useState(() => io(":8000"))
     return (
         <UserContext.Provider value={{user, setUser, socket}}>
             {children}

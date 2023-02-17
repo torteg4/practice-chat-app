@@ -3,7 +3,9 @@ import { useState, useContext } from "react";
 import io from 'socket.io-client'
 import { UserContext } from "../context/UserContext";
 import { useEffect } from "react";
+
 const PrivateChat = props => {
+
     const {user, setUser, socket} = useContext(UserContext);
     const [messages, setMessages] = useState([])
     const [currentMessage, setCurrentMessage] = useState("");
@@ -15,6 +17,7 @@ const PrivateChat = props => {
         })
         return () => setUser({...user, room: ""});
     }, [])
+    
     const sendMessage = (e) => {
         e.preventDefault();
         console.log("Sending private message");
