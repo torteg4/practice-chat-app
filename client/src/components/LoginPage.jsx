@@ -1,10 +1,12 @@
-import {useState, useContext} from 'react';
+import { useState, useContext } from 'react';
 import { UserContext } from '../context/UserContext';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-const LoginPage = props => {
-    const {setUser} = useContext(UserContext);
 
+const LoginPage = props => {
+
+    const {setUser} = useContext(UserContext);
+    
     const [state, setState] = useState({
         register: {
             username: "",
@@ -17,9 +19,9 @@ const LoginPage = props => {
             password: ""
         }
     })
-
     const {register, login} = state;
     const navigate = useNavigate();
+    
 
     const handleRegInputs = (e) => {
         props.setAuthorized("");
@@ -32,9 +34,10 @@ const LoginPage = props => {
         axios.post("http://localhost:8000/api/register", register, {withCredentials: true})
             .then(res => {
                 console.log(res)
+                //! It's supposed to be a lower case u, but it was throwing an error so I had to make it an upper case U for User
                 setUser({
-                    id: res.data.user.id,
-                    username: res.data.user.username,
+                    id: res.data.User.id,
+                    username: res.data.User.username,
                     room: ""
                 })
                 navigate("/users")
@@ -49,6 +52,7 @@ const LoginPage = props => {
     }
 
     const handleLogin = (e) => {
+
         e.preventDefault();
         axios.post("http://localhost:8000/api/login", login, {withCredentials:true})
             .then(res => {
@@ -69,26 +73,33 @@ const LoginPage = props => {
         <>
         
         <h1 className="text-danger" style={{display:"inline"}}>{props.authorized}</h1>
+
         <div className="container d-flex justify-content-around p-3 ">
+
             <form onSubmit={handleRegistration} className="col-md-5 p-3 text-start gap-3 bg-dark text-light">
                 <h2>Registration</h2>
                 <button onClick={() => navigate("/users")}>See users</button>
+
                 <div className="form-group">
                     <label>Username</label>
                     <input onChange={handleRegInputs} name="username" type="text" className="form-control" />
                 </div>
+
                 <div className="form-group">
                     <label>Email</label>
                     <input onChange={handleRegInputs} name="email" type="text" className="form-control" />
                 </div>
+
                 <div className="form-group">
                     <label>Password</label>
                     <input onChange={handleRegInputs} name="password" type="text" className="form-control" />
                 </div>
+
                 <div className="form-group">
                     <label>Confirm Password</label>
                     <input onChange={handleRegInputs} name="confirmPassword" type="text" className="form-control" />
                 </div>
+
                 <div className="form-group">
                     <button className="btn btn-primary">Register</button>
                 </div>
@@ -96,10 +107,12 @@ const LoginPage = props => {
 
             <form onSubmit={handleLogin} className="col-md-5 p-3 text-start gap-3 bg-dark text-light">
                 <h2>Login</h2>
+
                 <div className="form-group">
                     <label>Email</label>
                     <input onChange={handleLoginInputs} name="email" type="text" className="form-control" />
                 </div>
+
                 <div className="form-group">
                     <label>Password</label>
                     <input onChange={handleLoginInputs} name="password" type="text" className="form-control" />

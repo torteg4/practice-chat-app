@@ -2,10 +2,12 @@ import {useEffect, useState, useContext} from 'react';
 import { UserContext } from '../context/UserContext';
 import axios from 'axios';
 const Lobby = props => {
+
     const {user, socket} = useContext(UserContext);
     const [rooms, setRooms] = useState([]);
     const [roomId, setRoomId] = useState("");
     const [selectedRoom, setSelectedRoom] = useState("");
+    
     useEffect(() => {
         axios.get("http://localhost:8000/api/rooms", {withCredentials: true})
             .then(res => setRooms(res.data))

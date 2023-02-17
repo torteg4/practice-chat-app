@@ -1,6 +1,6 @@
-import {useEffect, useContext,useState} from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 
 const ShowUsers = props => {

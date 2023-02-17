@@ -11,6 +11,8 @@ module.exports = {
             .catch(err => res.status(400).json(err))
     },
 
+// !how do I make the user object lower case for register? becauase in login in, it's lower case due to setting the const as user. 
+
     register: (req, res) => {
         User.create(req.body)
             .then(newUser => {
